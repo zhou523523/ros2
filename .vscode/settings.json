@@ -1,0 +1,55 @@
+{
+  // ===== 通用设置（宿主机 / 容器内都适用）=====
+
+  // 新建终端直接进容器并加载 ROS 环境
+  "terminal.integrated.profiles.osx": {
+    "ROS 2 容器": {
+      "path": "${workspaceFolder}/shell.sh",
+      "icon": "terminal-linux"
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "ROS 2 容器",
+
+  // 如果用上了 Dev Containers 附加，这条让容器内新终端也自动 source
+  "terminal.integrated.profiles.linux": {
+    "ros2": {
+      "path": "/bin/bash",
+      "args": ["--rcfile", "/root/ros2_ws/.ros2_env.sh"]
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "ros2",
+
+  // 容器内的 Python（宿主机上这些路径不存在，VS Code 会自动忽略）
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "python.analysis.extraPaths": [
+    "/opt/ros/jazzy/lib/python3.12/site-packages",
+    "/root/ros2_ws/install/my_first_pkg/lib/python3.12/site-packages",
+    // Mac 侧的 rclpy 存根（从容器里同步的纯 .py），让本机也有补全
+    "${workspaceFolder}/.ros_stubs"
+  ],
+
+  // 注意：不要写 "ros.distro"，宿主机上没有 /opt/ros/jazzy，
+  // 写了反而会让 ROS 扩展在 Mac 上一直报 "Could not source ROS setup script"。
+  // 进容器后再让它自动探测。
+
+  // 编译产物和存根不参与搜索 / 文件监听，减少卡顿
+  "search.exclude": {
+    "**/build": true,
+    "**/install": true,
+    "**/log": true,
+    "**/.ros_stubs": true,
+    "**/.ros_includes_root": true
+  },
+  "files.watcherExclude": {
+    "**/build/**": true,
+    "**/install/**": true,
+    "**/log/**": true,
+    "**/.ros_stubs/**": true,
+    "**/.ros_includes_root/**": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "editor.rulers": [
+    100
+  ],
+  "cmake.sourceDirectory": "/Users/rongrendebaicai/ros2_ws/my_pkg"
+}

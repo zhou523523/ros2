@@ -1,0 +1,39 @@
+{
+  // 按 F5 调试。关键是 env：VS Code 不会自动 source ROS 的 setup.bash，
+  // 所以要手动把 PYTHONPATH / LD_LIBRARY_PATH 喂给解释器，否则 import rclpy 会失败。
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "调试：当前打开的 Python 文件",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "/opt/ros/jazzy/lib/python3.12/site-packages:/root/ros2_ws/install/my_first_pkg/lib/python3.12/site-packages",
+        "LD_LIBRARY_PATH": "/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/lib",
+        "AMENT_PREFIX_PATH": "/opt/ros/jazzy",
+        "ROS_DOMAIN_ID": "42",
+        "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST"
+      }
+    },
+    {
+      "name": "调试：hello_publisher",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/my_first_pkg/my_first_pkg/hello_publisher.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": false,
+      "env": {
+        "PYTHONPATH": "/opt/ros/jazzy/lib/python3.12/site-packages:/root/ros2_ws/install/my_first_pkg/lib/python3.12/site-packages",
+        "LD_LIBRARY_PATH": "/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/lib",
+        "AMENT_PREFIX_PATH": "/opt/ros/jazzy",
+        "ROS_DOMAIN_ID": "42",
+        "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST"
+      }
+    }
+  ]
+}

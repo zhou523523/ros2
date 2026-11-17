@@ -1,0 +1,20 @@
+{
+  // Mac 侧 C++ 智能提示配置
+  // 坑：ROS 2 的头文件在容器里（/opt/ros/jazzy/include/<包名>/），Mac 上没有，
+  //     所以把容器里的头文件同步到了 .ros_includes_root（扁平化成单一根目录）。
+  //     编译仍然在容器里做，这里只影响补全和报错提示。
+  "configurations": [
+    {
+      "name": "ROS 2 Jazzy (Mac 侧)",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/.ros_includes_root"
+      ],
+      "compilerPath": "/usr/bin/clang++",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "macos-clang-x64"
+    }
+  ],
+  "version": 4
+}

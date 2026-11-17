@@ -1,0 +1,69 @@
+{
+  // 所有任务都通过 ros-cmd.sh 执行：
+  // 在 Mac 上跑 → 自动 docker exec 进容器；在容器里跑 → 直接执行。
+  // 所以同一份配置在两种场景下都能用。
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "① 编译整个工作区",
+      "type": "process",
+      "command": "${workspaceFolder}/ros-cmd.sh",
+      "args": ["colcon build --symlink-install"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "② 只编译指定包",
+      "type": "process",
+      "command": "${workspaceFolder}/ros-cmd.sh",
+      "args": ["colcon build --symlink-install --packages-select ${input:pkg}"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "③ 运行示例节点 hello_publisher",
+      "type": "process",
+      "command": "${workspaceFolder}/ros-cmd.sh",
+      "args": ["ros2 run my_first_pkg hello_publisher"],
+      "problemMatcher": []
+    },
+    {
+      "label": "④ 运行当前打开的 Python 文件",
+      "type": "process",
+      "command": "${workspaceFolder}/ros-cmd.sh",
+      "args": ["python3 ${file}"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "⑤ 启动小海龟（VNC 画布）",
+      "type": "process",
+      "command": "${workspaceFolder}/ros-cmd.sh",
+      "args": ["QT_QPA_PLATFORM=vnc ros2 run turtlesim turtlesim_node"],
+      "problemMatcher": []
+    },
+    {
+      "label": "⑥ 查看话题列表",
+      "type": "process",
+      "command": "${workspaceFolder}/ros-cmd.sh",
+      "args": ["ros2 topic list"],
+      "problemMatcher": []
+    },
+    {
+      "label": "⑦ 查看节点列表",
+      "type": "process",
+      "command": "${workspaceFolder}/ros-cmd.sh",
+      "args": ["ros2 node list"],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "pkg",
+      "type": "promptString",
+      "description": "要编译的包名",
+      "default": "my_first_pkg"
+    }
+  ]
+}

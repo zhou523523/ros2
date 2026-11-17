@@ -1,0 +1,23 @@
+# ===== colcon 编译产物（绝对不该进仓库）=====
+build/
+install/
+log/
+
+# ===== 从容器同步到本机的辅助文件（换台电脑重新生成即可）=====
+# Python 补全存根，7.5MB
+.ros_stubs/
+# C++ 头文件副本，39MB
+.ros_includes_root/
+.vnc_port
+
+# ===== 历史遗留 / 旧方案 =====
+_old/
+
+# ===== 编辑器 / 系统垃圾 =====
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.swp
+*~
+*.log

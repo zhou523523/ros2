@@ -10,8 +10,6 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
-#include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/string.hpp"
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
@@ -28,6 +26,14 @@ if(BUILD_TESTING)
 endif()
 add_executable(publisher_node src/publisher_node.cpp)
 ament_target_dependencies(publisher_node "rclcpp" "std_msgs")
+# 给订阅者添加编译规则
+add_executable(subscriber_node src/subscriber_node.cpp)
+ament_target_dependencies(subscriber_node "rclcpp" "std_msgs")
+
+# 给订阅者添加安装规则
+install(TARGETS
+  subscriber_node
+  DESTINATION lib/${PROJECT_NAME})
 
 install(TARGETS
   publisher_node

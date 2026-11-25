@@ -38,4 +38,26 @@ install(TARGETS
 install(TARGETS
   publisher_node
   DESTINATION lib/${PROJECT_NAME})
+
+#话题发布者的类封装
+add_executable(publisher_node_class src/publisher_node_class.cpp)
+ament_target_dependencies(publisher_node_class "rclcpp" "std_msgs")
+
+install(TARGETS
+  publisher_node_class
+  DESTINATION lib/${PROJECT_NAME})
+
+#话题订阅者的类封装
+add_executable(subscriber_node_class src/subscriber_node_class.cpp)
+ament_target_dependencies(subscriber_node_class "rclcpp" "std_msgs")
+
+install(TARGETS
+  subscriber_node_class
+  DESTINATION lib/${PROJECT_NAME})
+
+  #打包发货
+  install(DIRECTORY launch
+   DESTINATION share/${PROJECT_NAME}/
+  )
+
 ament_package()

@@ -20,9 +20,8 @@ int main(int argc, char * argv[])
     // 创建订阅者，订阅 "/my_topic" 话题，队列长度为 10，绑定回调函数 Callback
     auto subscriber = node->create_subscription<std_msgs::msg::String>("/my_topic", 10, &Callback);
 
-    // 进入自旋，等待接收消息（这和你最开始学的 Hello world 节点一样）
+    // 进入自旋，等待接收消息
     rclcpp::spin(node);
-
     rclcpp::shutdown();
     return 0;
 }

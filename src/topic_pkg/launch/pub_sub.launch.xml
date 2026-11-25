@@ -1,0 +1,6 @@
+<launch>
+    #启动类封装发布者
+    <node pkg="topic_pkg" exec="publisher_node_class" name="my_publisher"  output="screen"/>
+    #启动类封装订阅者
+    <node pkg="topic_pkg" exec="subscriber_node_class" name="my_subscriber" output="screen"/>
+</launch>
